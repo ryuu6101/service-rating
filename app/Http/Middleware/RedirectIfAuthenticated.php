@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Session;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                Session::put('request-logout', true);
+                return back();
             }
         }
 

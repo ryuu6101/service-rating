@@ -39,10 +39,14 @@
         </div>
         @else
         <div class="card-body" wire:poll.10s>
-            <span class="text-center">
-                <i class="icon-spinner2 spinner mr-2"></i>
-                Đang đợi dữ liệu khách hàng
-            </span>
+            <div class="row mb-2">
+                <div class="col">
+                    <span class="text-center">
+                        <i class="icon-spinner2 spinner mr-2"></i>
+                        Đang đợi dữ liệu khách hàng
+                    </span>
+                </div>
+            </div>
         </div>
         @endif
     </div>

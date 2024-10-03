@@ -1,9 +1,9 @@
 <div>
-    <div class="card mb-0">
+    <div class="card mb-0" wire:poll.10s>
         {{-- <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#appreciateModal" >
             modal
         </button> --}}
-        @if (auth()->user()->role->slug != 'nhan_vien')
+        @if (!auth()->user() || auth()->user()->role->slug != 'nhan_vien')
         <div class="card-body">
             <div class="row mb-2">
                 <div class="col">
@@ -15,7 +15,11 @@
             </div>
             <div class="row mb-2">
                 <div class="col text-center">
+                    @if (auth()->user())
                     <a href="{{ route('logout') }}">Đăng nhập tài khoản khác</a>
+                    @else
+                    <a href="{{ route('login.index') }}">Đăng nhập</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -38,7 +42,7 @@
             @endforeach
         </div>
         @else
-        <div class="card-body" wire:poll.10s>
+        <div class="card-body">
             <div class="row mb-2">
                 <div class="col">
                     <span class="text-center">

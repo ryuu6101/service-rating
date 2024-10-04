@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $models = ['User', 'RatingStatical', 'Serving'];
+        $models = ['User', 'RatingStatical', 'Survey'];
 
         foreach ($models as $key => $value) {
             $this->app->bind(

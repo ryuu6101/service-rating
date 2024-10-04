@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        @elseif ($serving)
+        @elseif ($survey)
         <div class="card-body">
             <div class="text-center mb-4">
                 <h5 class="mb-0">Cảm ơn quý khách</h5>

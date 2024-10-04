@@ -4,15 +4,16 @@ namespace App\Livewire\Rating;
 
 use App\Models\Rating;
 use Livewire\Component;
-use App\Repositories\Servings\ServingRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\Surveys\SurveyRepositoryInterface;
 use App\Repositories\RatingStaticals\RatingStaticalRepositoryInterface;
 
 class ServiceRating extends Component
 {
-    protected $servingRepos;
+    protected $surveyRepos;
     protected $ratingStaticalRepos;
 
-    public $serving;
+    public $survey;
     public $ratings;
 
     public function mount() {
@@ -20,28 +21,28 @@ class ServiceRating extends Component
     }
 
     public function boot(
-        ServingRepositoryInterface $servingRepos,
+        SurveyRepositoryInterface $surveyRepos,
         RatingStaticalRepositoryInterface $ratingStaticalRepos
     ) {
-        $this->servingRepos = $servingRepos;
+        $this->surveyRepos = $surveyRepos;
         $this->ratingStaticalRepos = $ratingStaticalRepos;
     }
 
     public function rate($rating_id) {
         $params = [
-            'user_id' => $this->serving->user_id,
-            'client_id' => $this->serving->client_id,
+            'user_id' => $this->survey->user_id,
+            'client_id' => $this->survey->client_id,
             'rating_id' => $rating_id,
         ];
 
         $this->ratingStaticalRepos->create($params);
-        $this->serving->delete();
-        $this->reset('serving');
+        $this->survey->delete();
+        $this->reset('survey');
     }
 
     public function render()
     {
-        $this->serving = $this->servingRepos->getByUserId(auth()->user()->id ?? 0);
-        return view('web.home.livewire.service-rating');
+        $this->survey = $this->surveyRepos->getByUserId(Auth::id() ?? 0);
+        return view('web.survey.livewire.service-rating');
     }
 }

@@ -10,4 +10,8 @@ class SectionController extends Controller
     public function home() {
         return view('web.home.index');
     }
+
+    public function survey() {
+        return view('web.survey.index');
+    }
 }

@@ -18,6 +18,8 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        $credentials['is_actived'] = true;
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -25,7 +27,8 @@ class LoginController extends Controller
             if (Auth::user()->role->slug == 'quan_ly') {
                 return redirect()->route('rating-staticals.index');
             } elseif (Auth::user()->role->slug == 'nhan_vien') {
-                return redirect()->route('client-service.index');
+                // return redirect()->route('client-service.index');
+                return redirect()->route('home.index');
             }
             return redirect()->intended('/');
         }

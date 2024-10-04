@@ -4,6 +4,6 @@
 
 @section('contents')
 
-@livewire('rating.add-survey')
+@livewire('rating.service-rating')
 
 @endsection

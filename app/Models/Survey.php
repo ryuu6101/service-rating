@@ -6,7 +6,7 @@ use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Serving extends Model
+class Survey extends Model
 {
     use HasFactory, Filterable;
 

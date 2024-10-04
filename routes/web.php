@@ -17,6 +17,7 @@ use App\Http\Controllers\Web\SectionController as WebController;
 */
 
 Route::get('/', [WebController::class, 'home'])->name('home.index');
+Route::get('/survey', [WebController::class, 'survey'])->name('home.survey');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
@@ -27,8 +28,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::prefix('admin')->group(function () {
+        Route::redirect('/', 'admin/rating-staticals');
         Route::get('users', [AdminController::class, 'users'])->name('users.index');
-        Route::get('client-service', [AdminController::class, 'clientService'])->name('client-service.index');
+        // Route::get('client-service', [AdminController::class, 'clientService'])->name('client-service.index');
         Route::get('rating-staticals', [AdminController::class, 'ratingStaticals'])->name('rating-staticals.index');
     });
 });

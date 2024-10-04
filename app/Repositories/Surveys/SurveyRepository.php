@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Repositories\Servings;
+namespace App\Repositories\Surveys;
 
-use App\Models\Serving;
-use App\Filters\ServingFilter;
+use App\Models\Survey;
+use App\Filters\SurveyFilter;
 use App\Repositories\BaseRepository;
 
-class ServingRepository extends BaseRepository implements ServingRepositoryInterface
+class SurveyRepository extends BaseRepository implements SurveyRepositoryInterface
 {
     public function getModel() {
-        return Serving::class;
+        return Survey::class;
     }
 
     public function filter($params = [], $paginate = 0, $sort = 'asc') {
-        $filter = new ServingFilter();
+        $filter = new SurveyFilter();
 
         $list = $this->model->filter($filter, $params)->orderBy('created_at', $sort);
 

@@ -19,4 +19,8 @@ class RatingStatical extends Model
     public function rating() {
         return $this->belongsTo(Rating::class, 'rating_id');
     }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

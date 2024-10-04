@@ -18,6 +18,7 @@
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
+	<script src="{{ asset('global_assets/js/plugins/notifications/noty.min.js') }}"></script>
 	<script src="{{ asset('assets/js/app.js') }}"></script>
 	<!-- /theme JS files -->
 
@@ -65,5 +66,6 @@
 	@livewireScripts
     @stack('scripts')
 
+	<script src="{{ asset('custom_assets/js/script.js') }}"></script>
 </body>
 </html>

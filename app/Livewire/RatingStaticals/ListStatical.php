@@ -37,6 +37,7 @@ class ListStatical extends Component
     }
 
     public function search($params) {
+        unset($params['rating_id']);
         $this->staticals = $this->getStaticals($params);
     }
 

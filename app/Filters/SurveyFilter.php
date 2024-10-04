@@ -2,7 +2,7 @@
 
 namespace App\Filters;
 
-class ServingFilter extends QueryFilter
+class SurveyFilter extends QueryFilter
 {
     protected $filterable = [
         'id',

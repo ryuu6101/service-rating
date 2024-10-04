@@ -17,6 +17,15 @@
                             <input type="text" class="form-control" wire:model.blur="params.name">
                         </div>
                         <div class="col-lg col-md-6 col-12">
+                            <label>Đánh giá</label>
+                            <select class="form-control custom-select" wire:model="params.rating_id">
+                                <option value="">Tất cả</option>
+                                @foreach ($ratings as $key => $rating)
+                                <option value="{{ $rating->id }}">{{ $rating->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-lg col-md-6 col-12">
                             <label>Từ ngày</label>
                             <input type="text" class="form-control datepicker" readonly id="from_date">
                         </div>

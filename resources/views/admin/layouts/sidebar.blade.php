@@ -12,7 +12,7 @@
                     </a>
 
                     <div class="media-body">
-                        <div class="font-weight-semibold">Victoria Baker</div>
+                        <div class="font-weight-semibold">{{ auth()->user()->name }}</div>
                         {{-- <div class="font-size-sm line-height-sm opacity-50">
                             Senior developer
                         </div> --}}
@@ -47,7 +47,7 @@
                     <a href="{{ route('client-service.index') }}" class="nav-link client-service">
                         <i class="icon-vcard"></i>
                         <span>
-                            Chăm sóc khách hàng
+                            Khảo sát khách hàng
                         </span>
                     </a>
                 </li>

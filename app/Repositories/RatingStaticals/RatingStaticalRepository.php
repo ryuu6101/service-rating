@@ -20,4 +20,8 @@ class RatingStaticalRepository extends BaseRepository implements RatingStaticalR
         if ($paginate > 0) return $list->paginate($paginate);
         else return $list->get();
     }
+
+    public function refresh() {
+        $this->model->where('recent' , true)->update(['recent' => false]);
+    }
 }

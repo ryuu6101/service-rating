@@ -21,6 +21,8 @@ class CrudUser extends Component
     public $password;
     public $roles;
     public $role_id;
+    public $managers;
+    public $parrent_id;
 
     public function mount() {
         $this->roles = Role::all();
@@ -39,6 +41,7 @@ class CrudUser extends Component
             ],
             'password' => ['required'],
             'role_id' => ['gt:0'],
+            'parrent_id' => ['gt:0'],
         ];
     }
 
@@ -71,12 +74,15 @@ class CrudUser extends Component
         $this->username = $this->user->username ?? '';
         $this->password = $this->user->password ?? '';
         $this->role_id = $this->user->role_id ?? 2;
+        $this->managers = $this->userRepos->getByRoleId(1)->except([$this->user->id ?? 0]);
+        $this->parrent_id = $this->user->parrent_id ?? $this->managers->first()->id ?? 0;
     }
 
     public function create() {
         $this->resetErrorBag();
         $params = $this->validate();
         $params['password'] = bcrypt($this->password);
+        if ($this->role_id == 1) unset($params['parrent_id']);
         $user = $this->userRepos->create($params);
         $this->postCrud('Đã thêm tài khoản');
     }
@@ -85,6 +91,7 @@ class CrudUser extends Component
         $this->resetErrorBag();
         $params = $this->validate();
         unset($params['password']);
+        if ($this->role_id == 1) unset($params['parrent_id']);
         $this->user->update($params);
         $this->postCrud('Đã cập nhật tài khoản');
     }

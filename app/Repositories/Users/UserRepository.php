@@ -20,4 +20,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         if ($paginate > 0) return $list->paginate($paginate);
         else return $list->get();
     }
+
+    public function getByRoleId($id) {
+        return $this->model->where('role_id', $id)->get();
+    }
 }

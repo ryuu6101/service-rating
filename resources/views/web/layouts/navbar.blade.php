@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-lg navbar-dark navbar-static">
     <div class="navbar-brand ml-2 ml-lg-0">
-        <a href="{{ route('home.index') }}" class="d-inline-block">
+        <a href="#!" class="d-inline-block">
             <img src="{{ asset('images/Logo-CNPT-Copy-removebg-preview.png') }}" alt="">
         </a>
     </div>

@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 // return redirect(RouteServiceProvider::HOME);
-                Session::put('request-logout', true);
+                // Session::put('request-logout', true);
                 return back();
             }
         }

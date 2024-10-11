@@ -14,12 +14,12 @@ class RatingStaticalFilter extends QueryFilter
     ];
 
     public function filterFromDate($date) {
-        $date = Carbon::createFromFormat('d/m/Y', $date);
+        $date = Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
         return $this->builder->whereDate('created_at', '>=', $date);
     }
 
     public function filterToDate($date) {
-        $date = Carbon::createFromFormat('d/m/Y', $date);
+        $date = Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
         return $this->builder->whereDate('created_at', '<=', $date);
     }
 }

@@ -14,6 +14,7 @@ class RatingStatical extends Model
         'user_id',
         'client_id',
         'rating_id',
+        'recent',
     ];
 
     public function rating() {

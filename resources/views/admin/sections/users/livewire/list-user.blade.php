@@ -58,6 +58,11 @@
                                             data-toggle="modal" data-target="#userInfoModal" data-user-id="{{ $user->id }}">
                                                 <i class="icon-eye"></i>
                                             </span> --}}
+                                            @if ($user->role->slug == 'nhan_vien')
+                                            <a href="{{ route('home.survey', $user->id) }}" class="badge badge-sm badge-primary">
+                                                <i class="icon-tablet"></i>
+                                            </a>
+                                            @endif
                                             <span type="button" class="badge badge-sm badge-success" 
                                             data-toggle="modal" data-target="#crudUserModal" data-user-id="{{ $user->id }}">
                                                 <i class="icon-pencil5"></i>

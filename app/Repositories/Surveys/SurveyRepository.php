@@ -22,7 +22,7 @@ class SurveyRepository extends BaseRepository implements SurveyRepositoryInterfa
     }
 
     public function updateOrCreate($search, $params) {
-        $this->model->updateOrCreate($search, $params);
+        return $this->model->updateOrCreate($search, $params);
     }
 
     public function getByUserId($id) {

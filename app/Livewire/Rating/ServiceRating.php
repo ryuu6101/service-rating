@@ -13,10 +13,14 @@ class ServiceRating extends Component
     protected $surveyRepos;
     protected $ratingStaticalRepos;
 
+    public $user_id;
     public $survey;
     public $ratings;
+    public $rating_statical;
+    public $update_statical;
 
-    public function mount() {
+    public function mount($user_id) {
+        $this->user_id = $user_id;
         $this->ratings = Rating::all();
     }
 
@@ -33,16 +37,30 @@ class ServiceRating extends Component
             'user_id' => $this->survey->user_id,
             'client_id' => $this->survey->client_id,
             'rating_id' => $rating_id,
+            'recent' => true,
         ];
 
-        $this->ratingStaticalRepos->create($params);
+        $this->rating_statical = $this->ratingStaticalRepos->create($params);
         $this->survey->delete();
         $this->reset('survey');
     }
 
+    public function reselect() {
+        $this->update_statical = $this->rating_statical;
+    }
+
+    public function update($rating_id) {
+        $this->rating_statical = $this->ratingStaticalRepos->update($this->update_statical->id, [
+            'rating_id' => $rating_id,
+            'recent' => true,
+        ]);
+        $this->reset('update_statical');
+    }
+
     public function render()
     {
-        $this->survey = $this->surveyRepos->getByUserId(Auth::id() ?? 0);
+        // $this->survey = $this->surveyRepos->getByUserId(Auth::id() ?? 0);
+        $this->survey = $this->surveyRepos->getByUserId($this->user_id);
         return view('web.survey.livewire.service-rating');
     }
 }

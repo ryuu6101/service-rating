@@ -18,13 +18,15 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Quản lý',
                 'username' => 'quanly',
                 'password' => bcrypt('123456'),
-                'role_id' => 1
+                'role_id' => 1,
+                'parrent_id' => null,
             ],
             [
                 'name' => 'Nhân viên',
                 'username' => 'nhanvien',
                 'password' => bcrypt('123456'),
-                'role_id' => 2
+                'role_id' => 2,
+                'parrent_id' => 1,
             ],
         ];
 

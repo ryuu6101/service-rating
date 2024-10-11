@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SectionController extends Controller
 {
@@ -11,7 +12,8 @@ class SectionController extends Controller
         return view('web.home.index');
     }
 
-    public function survey() {
-        return view('web.survey.index');
+    public function survey($id) {
+        Auth::logout();
+        return view('web.survey.index')->with(['user_id' => $id]);
     }
 }

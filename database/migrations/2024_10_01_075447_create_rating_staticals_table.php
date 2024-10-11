@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('client_id')->nullable();
             $table->unsignedBigInteger('rating_id')->nullable();
+            $table->boolean('recent')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

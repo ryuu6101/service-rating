@@ -21,7 +21,7 @@
 
                         <div class="row">
                             <div class="col-12 mb-2">
-                                <input type="text" class="form-control" placeholder="Mã khách hàng" wire:model.blur="client_id">
+                                <input type="text" class="form-control" placeholder="Mã số đăng ký" wire:model.blur="client_id">
                                 @error('client_id')
                                 <span class="text-danger ml-1">{{$message}}</span>
                                 @enderror

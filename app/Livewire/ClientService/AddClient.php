@@ -3,17 +3,18 @@
 namespace App\Livewire\ClientService;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\ClientService\ListClient;
-use App\Repositories\Servings\ServingRepositoryInterface;
+use App\Repositories\Surveys\SurveyRepositoryInterface;
 
 class AddClient extends Component
 {
-    protected $servingRepos;
+    protected $surveyRepos;
 
     public $client_id;
 
-    public function boot(ServingRepositoryInterface $servingRepos) {
-        $this->servingRepos = $servingRepos;
+    public function boot(SurveyRepositoryInterface $surveyRepos) {
+        $this->surveyRepos = $surveyRepos;
     }
 
     public function rules() {
@@ -24,7 +25,7 @@ class AddClient extends Component
 
     public function messages() {
         return [
-            'client_id.required' => 'Vui lòng nhập mã khách hàng.',
+            'client_id.required' => 'Vui lòng nhập mã số đăng ký.',
         ];
     }
 
@@ -36,13 +37,13 @@ class AddClient extends Component
     public function save() {
         $this->resetErrorBag();
         $params = $this->validate();
-        $user_id = auth()->user()->id;
-        $this->servingRepos->updateOrCreate(['user_id' => $user_id], $params);
-        $this->postCrud('Đã thêm khách hàng');
+        $user_id = Auth::id();
+        $this->surveyRepos->updateOrCreate(['user_id' => $user_id], $params);
+        $this->postCrud('Đã mở khảo sát');
     }
 
     public function postCrud($message = '') {
-        // $this->dispatch('refresh')->to(ListClient::class);
+        $this->dispatch('refresh')->to(ListClient::class);
         $this->dispatch('close-add-client-modal');
         $this->dispatch('show-message',
             type: 'success', 

@@ -9,7 +9,7 @@
     </div>
 
     <div class="navbar-brand text-center text-lg-left">
-        <a href="{{ route('home.index') }}" class="d-inline-block">
+        <a href="#!" class="d-inline-block">
             <img src="{{ asset('images/Logo-CNPT-Copy-removebg-preview.png') }}" class="d-none d-sm-block" alt="">
             <img src="{{ asset('images/Logo-CNPT-Copy-removebg-preview.png') }}" class="d-sm-none" alt="">
         </a>

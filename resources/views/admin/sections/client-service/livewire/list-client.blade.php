@@ -12,17 +12,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <select class="form-select form-select-sm custom-select mb-3 w-auto" wire:model="paginate">
+                        <select class="form-select form-select-sm custom-select mb-3 w-auto" wire:model.live="paginate">
                             @for ($page = 5; $page <= 20; $page+=5)
                             <option value="{{ $page }}">{{ $page }}</option>
                             @endfor
                         </select>
-                    </div>
-                    <div class="col text-right">
-                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#addClientModal">
-                            <i class="icon-user-plus mr-2"></i>
-                            Thêm mới
-                        </button>
                     </div>
                 </div>
 
@@ -33,21 +27,27 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">STT</th>
-                                        <th scope="col" class="text-center">Mã khách hàng</th>
-                                        <th scope="col" class="text-center">Ngày tháng</th>
+                                        <th scope="col" class="text-center">Mã số đăng ký</th>
                                         <th scope="col" class="text-center">Đánh giá</th>
+                                        <th scope="col" class="text-center">Ngày tháng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($rating_stasticals && count($rating_stasticals) > 0)
-                                    @php($sn = ($rating_stasticals->perPage() * ($rating_stasticals->currentPage() - 1)) + 1)
-                                    @foreach ($rating_stasticals as $key => $rating_stastical)
+
+                                    @if ($rating_staticals && count($rating_staticals) > 0)
+                                    @php($sn = ($rating_staticals->perPage() * ($rating_staticals->currentPage() - 1)) + 1)
+                                    @foreach ($rating_staticals as $key => $rating_statical)
                     
                                     <tr>
                                         <td class="text-center">{{ $sn++ }}</td>
-                                        <td class="text-center">{{ $rating_stastical->client_id }}</td>
-                                        <td class="text-center">{{ $rating_stastical->created_at->format('d/m/Y H:i') }}</td>
-                                        <td class="text-center">{{ $rating_stastical->rating->title }}</td>
+                                        <td class="text-center">{{ $rating_statical->client_id }}</td>
+                                        <td class="text-center position-relative">
+                                            {{ $rating_statical->rating->title }}
+                                            @if ($rating_statical->recent)
+                                            <span class="badge badge-success position-absolute right-0 mr-2">new</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{ $rating_statical->created_at->format('d/m/Y H:i') }}</td>
                                     </tr>
                     
                                     @endforeach
@@ -64,7 +64,7 @@
 
                 <div class="row">
                     <div class="col">
-                        @include('admin.components.livewire-table-nav', ['collection' => $rating_stasticals])
+                        @include('admin.components.livewire-table-nav', ['collection' => $rating_staticals])
                     </div>
                 </div>
             </div>

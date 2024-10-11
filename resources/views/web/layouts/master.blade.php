@@ -25,33 +25,43 @@
 	@livewireStyles
     @stack('styles')
 
+	<style>
+		.page-content{
+			background-image: url("{{ asset('images/HD Desktop Blue.jpg') }}");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+	</style>
+
 </head>
 
 <body>
 
 	<!-- Main navbar -->
-    @include('web.layouts.navbar')
+    {{-- @include('web.layouts.navbar') --}}
 	<!-- /main navbar -->
 
 
 	<!-- Page content -->
 	<div class="page-content">
-
+		
 		<!-- Main content -->
 		<div class="content-wrapper">
-
+			
 			<!-- Inner content -->
-			<div class="content-inner">
+			<div class="content-inner" style="overflow-x: hidden">
+
+				@include('web.layouts.header')
 
 				<!-- Content area -->
-				<div class="content d-flex justify-content-center align-items-center">
+				<div class="content d-flex justify-content-center p-0">
                 @yield('contents')
 				</div>
 				<!-- /content area -->
 
-
 				<!-- Footer -->
-				@include('web.layouts.footer')
+				{{-- @include('web.layouts.footer') --}}
 				<!-- /footer -->
 
 			</div>

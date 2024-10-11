@@ -4,6 +4,6 @@
 
 @section('contents')
 
-@livewire('rating.service-rating')
+@livewire('rating.service-rating', ['user_id' => $user_id])
 
 @endsection

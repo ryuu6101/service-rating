@@ -13,7 +13,7 @@
                 <form wire:submit.prevent="search">
                     <div class="row">
                         <div class="col-lg col-md-6 col-12">
-                            <label>Mã khách hàng</label>
+                            <label>Mã số đăng ký</label>
                             <input type="text" class="form-control" wire:model.blur="params.client_id">
                         </div>
                         <div class="col-lg col-md-6 col-12">

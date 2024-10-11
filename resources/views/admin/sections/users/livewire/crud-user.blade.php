@@ -33,18 +33,21 @@
                         </div>
                         @else
                         <div class="row">
+
                             <div class="col-12 mb-2">
                                 <input type="text" class="form-control" placeholder="Họ & tên" wire:model.blur="name">
                                 @error('name')
                                 <span class="text-danger ml-1">{{$message}}</span>
                                 @enderror
                             </div>
+
                             <div class="col-12 mb-2">
                                 <input type="text" class="form-control" placeholder="Tên tài khoản" wire:model.blur="username">
                                 @error('username')
                                 <span class="text-danger ml-1">{{$message}}</span>
                                 @enderror
                             </div>
+
                             @if ($action == 'create')
                             <div class="col-12 mb-2">
                                 <input type="password" class="form-control" placeholder="Mật khẩu" wire:model.blur="password">
@@ -53,12 +56,13 @@
                                 @enderror
                             </div>
                             @endif
+
                             <div class="col-12 mb-2">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Chức vụ</span>
                                     </div>
-                                    <select class="form-control" wire:model="role_id">
+                                    <select class="form-control" wire:model.live="role_id">
                                         @foreach ($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->title }}</option>
                                         @endforeach
@@ -68,6 +72,30 @@
                                 <span class="text-danger ml-1">{{$message}}</span>
                                 @enderror
                             </div>
+
+                            @if ($role_id == 2)
+                            <div class="col-12 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Quản lý</span>
+                                    </div>
+                                    @if ($managers->count() > 0)
+                                    <select class="form-control" wire:model="parrent_id">
+                                        @foreach ($managers as $manager)
+                                        <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @else
+                                    <select class="form-control" disabled>
+                                        <option value="">(Vui lòng tạo tài khoản quản lý khác)</option>
+                                    </select>
+                                    @endif
+                                </div>
+                                @error('parrent_id')
+                                <span class="text-danger ml-1">{{$message}}</span>
+                                @enderror
+                            </div>
+                            @endif
                         </div>
                         @endif
 
@@ -81,11 +109,18 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:loading.delay.longer.attr="disabled">
                         Đóng
                     </button>
+                    @if ($role_id == 2 && $managers->count()  <= 0)
+                    <button class="btn btn-primary" disabled>
+                        <span><i class="icon-floppy-disk mr-2"></i></span>
+                        Lưu
+                    </button>
+                    @else
                     <button type="submit" class="btn btn-primary" form="crudUserForm" wire:loading.delay.longer.attr="disabled">
                         <span class="spinner-border spinner-border-sm mr-2" wire:loading.delay.longer></span>
                         <span wire:loading.delay.longer.remove><i class="icon-floppy-disk mr-2"></i></span>
                         Lưu
                     </button>
+                    @endif
                     @endif
                 </div>
 

@@ -6,6 +6,7 @@ use App\Models\Rating;
 use Livewire\Component;
 use App\Livewire\RatingStaticals\ListDetail;
 use App\Livewire\RatingStaticals\ListStatical;
+use App\Livewire\RatingStaticals\StaticalChart;
 
 class SearchStatical extends Component
 {
@@ -17,7 +18,8 @@ class SearchStatical extends Component
     }
 
     public function search() {
-        $this->dispatch('search', params: $this->params)->to(ListStatical::class);
+        // $this->dispatch('search', params: $this->params)->to(ListStatical::class);
+        $this->dispatch('search', params: $this->params)->to(StaticalChart::class);
         $this->dispatch('search', params: $this->params)->to(ListDetail::class);
     }
 

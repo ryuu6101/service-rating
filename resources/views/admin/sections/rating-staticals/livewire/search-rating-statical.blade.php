@@ -25,11 +25,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg col-md-6 col-12">
+                        <div class="col-lg col-md-6 col-12" wire:ignore>
                             <label>Từ ngày</label>
                             <input type="text" class="form-control datepicker" readonly id="from_date">
                         </div>
-                        <div class="col-lg col-md-6 col-12">
+                        <div class="col-lg col-md-6 col-12" wire:ignore>
                             <label>Đến ngày</label>
                             <input type="text" class="form-control datepicker" readonly id="to_date">
                         </div>
@@ -77,7 +77,7 @@
         });
 
         $(document).on('reset-datepicker', function(e) {
-            $('.datepicker').daterangepicker().val('');
+            $('.datepicker').val('');
         })
     })
 </script>

@@ -10,9 +10,30 @@
             </div>
 
             <div class="card-body">
-                <div class="row">
+                <div class="row justify-content-between mb-3">
                     <div class="col">
-                        <select class="form-select form-select-sm custom-select mb-3 w-auto" wire:model="paginate">
+                        <div class="input-group">
+                            <div class="mr-2">
+                                <input type="number" class="form-control hidden-arrow" 
+                                placeholder="Mã số đăng ký" wire:model.live="params.client_id">
+                            </div>
+                            <div class="mr-2">
+                                <select class="form-select custom-select" wire:model.live="params.rating_id">
+                                    <option value="">Tất cả đánh giá</option>
+                                    @foreach ($ratings as $rating)
+                                    <option value="{{ $rating->id }}">{{ $rating->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mr-2">
+                                <button type="button" class="btn btn-warning" wire:click.prevent="resetInput">
+                                    <i class="icon-loop3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <select class="form-select custom-select w-auto float-right" wire:model="paginate">
                             @for ($page = 5; $page <= 20; $page+=5)
                             <option value="{{ $page }}">{{ $page }}</option>
                             @endfor
@@ -27,7 +48,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">STT</th>
-                                        <th scope="col" class="text-center">Nhân viên</th>
+                                        {{-- <th scope="col" class="text-center">Nhân viên</th> --}}
                                         <th scope="col" class="text-center">Mã khách hàng</th>
                                         <th scope="col" class="text-center">Ngày tháng</th>
                                         <th scope="col" class="text-center">Đánh giá</th>
@@ -40,7 +61,7 @@
                     
                                     <tr>
                                         <td class="text-center">{{ $sn++ }}</td>
-                                        <td class="text-left">{{ $list_detail->user->name }}</td>
+                                        {{-- <td class="text-left">{{ $list_detail->user->name }}</td> --}}
                                         <td class="text-center">{{ $list_detail->client_id }}</td>
                                         <td class="text-center">{{ $list_detail->created_at->format('d/m/Y H:i') }}</td>
                                         <td class="text-center">{{ $list_detail->rating->title }}</td>

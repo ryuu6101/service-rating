@@ -24,6 +24,7 @@
 	<!-- Theme JS files -->
 	<script src="{{ asset('global_assets/js/plugins/visualization/d3/d3.min.js') }}"></script>
 	<script src="{{ asset('global_assets/js/plugins/visualization/d3/d3_tooltip.js') }}"></script>
+	<script src="{{ asset('global_assets/js/plugins/visualization/echarts/echarts.min.js') }}"></script>
 	<script src="{{ asset('global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 	<script src="{{ asset('global_assets/js/plugins/pickers/daterangepicker.js') }}"></script>
 	<script src="{{ asset('global_assets/js/plugins/notifications/noty.min.js') }}"></script>

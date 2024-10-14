@@ -45,7 +45,7 @@
 
     @elseif ($rating_statical)
 
-    <div class="text-center banner-title">
+    <div class="text-center banner-title py-2">
         <h1>
             Cảm ơn quý khách đã để lại ý kiến.
         </h1>
@@ -54,7 +54,7 @@
         <h4 class="">Mã số đăng ký: {{ $rating_statical->client_id }}</h4>
     </div>
     <div class="row justify-content-center" wire:poll.10s>
-        <div class="col-3">
+        <div class="col-md-3 col-10">
             <div class="card">
                 <div class="card-body px-3">
                     <div class="mb-2 text-center">

@@ -54,4 +54,12 @@ class User extends Authenticatable
     public function rating_staticals() {
         return $this->hasMany(RatingStatical::class, 'user_id');
     }
+
+    public function childs() {
+        return $this->hasMany(User::class, 'parrent_id');
+    }
+
+    public function parrent() {
+        return $this->belongsTo(User::class, 'parrent_id');
+    }
 }

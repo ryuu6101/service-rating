@@ -26,7 +26,7 @@
     <div class="text-center">
         <h5 class="">Mã số đăng ký: {{ $survey->client_id ?? $update_statical->client_id }}</h5>
     </div>
-    <div class="row justify-content-center align-items-center flex-column flex-md-row">
+    <div class="row justify-content-center align-items-center flex-column flex-md-row" wire:poll.10s>
         @foreach ($ratings as $rating)
         <div class="col-xl-2 col-md-3 col-sm-5 col-7">
             @if ($survey)
@@ -54,8 +54,8 @@
         <h4 class="">Mã số đăng ký: {{ $rating_statical->client_id }}</h4>
     </div>
     <div class="row justify-content-center" wire:poll.10s>
-        <div class="col-md-3 col-10">
-            <div class="card">
+        <div class="col-auto">
+            <div class="card px-4">
                 <div class="card-body px-3">
                     <div class="mb-2 text-center">
                         <span>Kết quả đánh giá: {{ $rating_statical->rating->title }}</span>
@@ -71,8 +71,8 @@
     @else
 
     <div class="row mb-2 mt-4 justify-content-center">
-        <div class="col-3">
-            <div class="card mb-0" wire:poll.10s>
+        <div class="col-auto">
+            <div class="card mb-0 px-3" wire:poll.10s>
                 <div class="card-body text-center">
                     <span class="text-center">
                         <i class="icon-spinner2 spinner mr-2"></i>

@@ -11,6 +11,7 @@ class RatingStaticalFilter extends QueryFilter
         'user_id',
         'client_id',
         'rating_id',
+        'recent',
     ];
 
     public function filterFromDate($date) {

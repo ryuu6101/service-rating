@@ -12,8 +12,8 @@ class SectionController extends Controller
         return view('web.home.index');
     }
 
-    public function survey($id) {
+    public function survey($user_id) {
         Auth::logout();
-        return view('web.survey.index')->with(['user_id' => $id]);
+        return view('web.survey.index')->with(['user_id' => $user_id]);
     }
 }

@@ -33,5 +33,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users', [AdminController::class, 'users'])->name('users.index');
         Route::get('client-service', [AdminController::class, 'clientService'])->name('client-service.index');
         Route::get('rating-staticals', [AdminController::class, 'ratingStaticals'])->name('rating-staticals.index');
+        Route::get('banner-images', [AdminController::class, 'bannerImages'])->name('banner-images.index');
     });
 });

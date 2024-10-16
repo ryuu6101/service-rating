@@ -23,6 +23,7 @@
                                     @foreach ($ratings as $rating)
                                     <option value="{{ $rating->id }}">{{ $rating->title }}</option>
                                     @endforeach
+                                    <option value="0">Không đánh giá</option>
                                 </select>
                             </div>
                             <div class="mr-2">
@@ -57,20 +58,26 @@
                                 <tbody>
                                     @if ($list_details && count($list_details) > 0)
                                     @php($sn = ($list_details->perPage() * ($list_details->currentPage() - 1)) + 1)
-                                    @foreach ($list_details as $key => $list_detail)
+                                    @foreach ($list_details as $key => $detail)
                     
                                     <tr>
                                         <td class="text-center">{{ $sn++ }}</td>
-                                        {{-- <td class="text-left">{{ $list_detail->user->name }}</td> --}}
-                                        <td class="text-center">{{ $list_detail->client_id }}</td>
-                                        <td class="text-center">{{ $list_detail->created_at->format('d/m/Y H:i') }}</td>
-                                        <td class="text-center">{{ $list_detail->rating->title }}</td>
+                                        {{-- <td class="text-left">{{ $detail->user->name }}</td> --}}
+                                        <td class="text-center">{{ $detail->client_id }}</td>
+                                        <td class="text-center">{{ $detail->created_at->format('d/m/Y H:i') }}</td>
+                                        <td class="text-center">
+                                            @if ($detail->rating_id > 0)
+                                            <span class="badge badge-primary">{{ $detail->rating->title }}</span>
+                                            @else
+                                            <span class="badge badge-secondary">Không đánh giá</span>
+                                            @endif
+                                        </td>
                                     </tr>
                     
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td colspan="5" class="text-center">(Không tìm thấy dữ liệu)</td>
+                                        <td colspan="4" class="text-center">(Không tìm thấy dữ liệu)</td>
                                     </tr>
                                     @endif
                                 </tbody>

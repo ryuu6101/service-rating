@@ -62,4 +62,8 @@ class User extends Authenticatable
     public function parrent() {
         return $this->belongsTo(User::class, 'parrent_id');
     }
+
+    public function survey() {
+        return $this->hasOne(Survey::class, 'user_id');
+    }
 }

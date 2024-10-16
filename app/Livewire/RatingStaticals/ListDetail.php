@@ -2,11 +2,11 @@
 
 namespace App\Livewire\RatingStaticals;
 
-use App\Models\Rating;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Users\UserRepositoryInterface;
+use App\Repositories\Ratings\RatingRepositoryInterface;
 use App\Repositories\RatingStaticals\RatingStaticalRepositoryInterface;
 
 class ListDetail extends Component
@@ -14,6 +14,7 @@ class ListDetail extends Component
     use WithPagination;
 
     protected $userRepos;
+    protected $ratingRepos;
     protected $ratingStaticalRepos;
 
     public $paginate = 10;
@@ -24,16 +25,18 @@ class ListDetail extends Component
 
     public function boot(
         UserRepositoryInterface $userRepos,
+        RatingRepositoryInterface $ratingRepos,
         RatingStaticalRepositoryInterface $ratingStaticalRepos
     ) {
         $this->userRepos = $userRepos;
+        $this->ratingRepos = $ratingRepos;
         $this->ratingStaticalRepos = $ratingStaticalRepos;
     }
 
     public function mount() {
         $users = $this->userRepos->find(Auth::id())->childs;
         $this->params['user_id'] = $users->first()->id;
-        $this->ratings = Rating::all();
+        $this->ratings = $this->ratingRepos->getAll();
     }
 
     public function search($params) {

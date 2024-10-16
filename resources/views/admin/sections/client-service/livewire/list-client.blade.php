@@ -23,6 +23,7 @@
                                     @foreach ($ratings as $rating)
                                     <option value="{{ $rating->id }}">{{ $rating->title }}</option>
                                     @endforeach
+                                    <option value="0">Không đánh giá</option>
                                 </select>
                             </div>
                             <div class="mr-2">
@@ -67,7 +68,11 @@
                                         <td class="text-center">{{ $sn++ }}</td>
                                         <td class="text-center">{{ $rating_statical->client_id }}</td>
                                         <td class="text-center position-relative">
-                                            {{ $rating_statical->rating->title }}
+                                            @if ($rating_statical->rating_id > 0)
+                                            <span class="badge badge-info">{{ $rating_statical->rating->title }}</span>
+                                            @else
+                                            <span class="badge badge-secondary">Không đánh giá</span>
+                                            @endif
                                             @if ($rating_statical->recent)
                                             <span class="badge badge-success position-absolute right-0 mr-2">new</span>
                                             @endif

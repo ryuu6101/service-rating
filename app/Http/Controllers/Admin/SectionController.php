@@ -39,4 +39,15 @@ class SectionController extends Controller
 
         return view('admin.sections.rating-staticals.index')->with($menu);
     }
+
+    public function bannerImages() {
+        if (auth()->user()->role->slug != 'quan_ly') return abort(403);
+
+        $menu = [
+            'sidebar' => 'banner-images',
+            'breadcrumb' => 'Ảnh banner',
+        ];
+
+        return view('admin.sections.banner-images.index')->with($menu);
+    }
 }

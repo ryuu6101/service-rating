@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -13,12 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $models = ['User', 'RatingStatical', 'Survey'];
+        $models = ['User', 'RatingStatical', 'Survey', 'Rating', 'BannerImage'];
 
         foreach ($models as $key => $value) {
+            $plural = Str::plural($value);
             $this->app->bind(
-                "App\\Repositories\\{$value}s\\{$value}RepositoryInterface",
-                "App\\Repositories\\{$value}s\\{$value}Repository",
+                "App\\Repositories\\{$plural}\\{$value}RepositoryInterface",
+                "App\\Repositories\\{$plural}\\{$value}Repository",
             );
         }
     }

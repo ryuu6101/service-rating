@@ -2,47 +2,66 @@
 
 namespace App\Livewire\Rating;
 
-use App\Models\Rating;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\Users\UserRepositoryInterface;
+use App\Repositories\Ratings\RatingRepositoryInterface;
 use App\Repositories\Surveys\SurveyRepositoryInterface;
 use App\Repositories\RatingStaticals\RatingStaticalRepositoryInterface;
 
 class ServiceRating extends Component
 {
+    protected $userRepos;
+    protected $ratingRepos;
     protected $surveyRepos;
     protected $ratingStaticalRepos;
 
+    public $user;
     public $user_id;
-    public $survey;
     public $ratings;
     public $rating_statical;
     public $update_statical;
 
     public function mount($user_id) {
+        $this->user = $this->userRepos->find($user_id);
         $this->user_id = $user_id;
-        $this->ratings = Rating::all();
+        $this->ratings = $this->ratingRepos->getAll();
     }
 
     public function boot(
+        UserRepositoryInterface $userRepos,
+        RatingRepositoryInterface $ratingRepos,
         SurveyRepositoryInterface $surveyRepos,
         RatingStaticalRepositoryInterface $ratingStaticalRepos
     ) {
+        $this->userRepos = $userRepos;
+        $this->ratingRepos = $ratingRepos;
         $this->surveyRepos = $surveyRepos;
         $this->ratingStaticalRepos = $ratingStaticalRepos;
     }
 
     public function rate($rating_id) {
+        // $survey = $this->user->survey;
+        $survey = $this->surveyRepos->getByUserId($this->user_id);
+
+        if (!$survey) {
+            $this->dispatch('show-message',
+                type: 'error', 
+                message: 'Đã xảy ra lỗi!',
+            );
+
+            return;
+        }
+
         $params = [
-            'user_id' => $this->survey->user_id,
-            'client_id' => $this->survey->client_id,
+            'user_id' => $survey->user_id,
+            'client_id' => $survey->client_id,
             'rating_id' => $rating_id,
             'recent' => true,
         ];
 
         $this->rating_statical = $this->ratingStaticalRepos->create($params);
-        $this->survey->delete();
-        $this->reset('survey');
+        $survey->delete();
     }
 
     public function reselect() {
@@ -60,7 +79,9 @@ class ServiceRating extends Component
     public function render()
     {
         // $this->survey = $this->surveyRepos->getByUserId(Auth::id() ?? 0);
-        $this->survey = $this->surveyRepos->getByUserId($this->user_id);
-        return view('web.survey.livewire.service-rating');
+        // $this->survey = $this->surveyRepos->getByUserId($this->user_id);
+        // $survey = $this->user->survey;
+        $survey = $this->surveyRepos->getByUserId($this->user_id);
+        return view('web.survey.livewire.service-rating')->with(['survey' => $survey]);
     }
 }

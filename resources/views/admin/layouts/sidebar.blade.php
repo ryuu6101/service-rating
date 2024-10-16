@@ -70,6 +70,14 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('banner-images.index') }}" class="nav-link banner-images">
+                        <i class="icon-images2"></i>
+                        <span>
+                            Ảnh banner
+                        </span>
+                    </a>
+                </li>
                 @endif
 
             </ul>

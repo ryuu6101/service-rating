@@ -2,16 +2,17 @@
 
 namespace App\Livewire\RatingStaticals;
 
-use App\Models\Rating;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\RatingStaticals\ListDetail;
 use App\Repositories\Users\UserRepositoryInterface;
+use App\Repositories\Ratings\RatingRepositoryInterface;
 use App\Repositories\RatingStaticals\RatingStaticalRepositoryInterface;
 
 class StaticalChart extends Component
 {
     protected $userRepos;
+    protected $ratingRepos;
     protected $ratingStaticalRepos;
 
     public $users;
@@ -25,9 +26,11 @@ class StaticalChart extends Component
 
     public function boot(
         UserRepositoryInterface $userRepos,
-        RatingStaticalRepositoryInterface $ratingStaticalRepos
+        RatingRepositoryInterface $ratingRepos,
+        RatingStaticalRepositoryInterface $ratingStaticalRepos,
     ) {
         $this->userRepos = $userRepos;
+        $this->ratingRepos = $ratingRepos;
         $this->ratingStaticalRepos = $ratingStaticalRepos;
     }
 
@@ -58,7 +61,7 @@ class StaticalChart extends Component
         // $rating_staticals = $user->rating_staticals;
         $this->params['user_id'] = $this->user_id;
         $rating_staticals = $this->ratingStaticalRepos->filter($this->params);
-        $ratings = Rating::all();
+        $ratings = $this->ratingRepos->getAll();
 
         $this->chart_legend = [];
         $this->chart_series = [];
@@ -72,6 +75,15 @@ class StaticalChart extends Component
             $this->chart_series[] = [
                 'value' => $rating_count,
                 'name' => $rating->title,
+            ];
+        }
+
+        $no_rating_count = $rating_staticals->where('rating_id', 0)->count();
+        if ($no_rating_count > 0) {
+            $this->chart_legend[] = 'Không đánh giá';
+            $this->chart_series[] = [
+                'value' => $no_rating_count,
+                'name' => 'Không đánh giá',
             ];
         }
     }

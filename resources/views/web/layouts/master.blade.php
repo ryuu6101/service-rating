@@ -26,7 +26,7 @@
     @stack('styles')
 
 	<style>
-		.page-content{
+		.page-content {
 			background-image: url("{{ asset('images/HD Desktop Blue.jpg') }}");
 			background-position: center;
 			background-repeat: no-repeat;
@@ -52,7 +52,9 @@
 			<!-- Inner content -->
 			<div class="content-inner" style="overflow-x: hidden">
 
+				<!-- Header -->
 				@include('web.layouts.header')
+				<!-- /header -->
 
 				<!-- Content area -->
 				<div class="content d-flex justify-content-center p-0">
@@ -61,7 +63,7 @@
 				<!-- /content area -->
 
 				<!-- Footer -->
-				{{-- @include('web.layouts.footer') --}}
+				@include('web.layouts.footer')
 				<!-- /footer -->
 
 			</div>

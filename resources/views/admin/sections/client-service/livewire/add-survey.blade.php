@@ -16,13 +16,20 @@
                             <div class="input-group d-flex justify-content-center">
                                 <div>
                                     <input type="number" class="form-control hidden-arrow" 
-                                    placeholder="Mã hồ sơ" wire:model.blur="new_client_id">
+                                    placeholder="Mã số đăng ký" wire:model.blur="new_client_id">
                                     @error('client_id')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                                 <div>
+                                    @if (!$survey)
                                     <button type="submit" class="btn btn-success ml-2 px-4">Gửi</button>
+                                    @else
+                                    <button type="submit" class="btn btn-success ml-2 px-4">Gửi lại mã</button>
+                                    <button type="button" class="btn btn-danger ml-2 px-4" wire:click.prevent="cancelSurvey">
+                                        Xóa mã
+                                    </button>
+                                    @endif
                                 </div>
                             </div>
                         </form>
@@ -35,8 +42,9 @@
                             <span>Mã số đăng ký đang được hiển thị trên màn hình khách hàng: {{ $survey->client_id }}</span>
                         </div>
                         @elseif ($rating_result)
-                        <div class="d-flex justify-content-center mt-2" wire:poll.10s="check">
-                            <span class="text-success">Kết quả đánh giá: {{ $rating_result }}</span>
+                        <div class="d-flex flex-column align-items-center justify-content-center mt-2" wire:poll.10s="check">
+                            <span class="text-success">Mã số đăng ký: {{ $rating_result['client_id'] }}</span>
+                            <span class="text-success">Kết quả đánh giá: {{ $rating_result['rating'] }}</span>
                         </div>
                         @endif
                     </div>

@@ -50,7 +50,7 @@ class ListDetail extends Component
 
     public function render()
     {
-        $list_details = $this->ratingStaticalRepos->filter($this->params, $this->paginate);
+        $list_details = $this->ratingStaticalRepos->filter($this->params, $this->paginate, 'desc');
         return view('admin.sections.rating-staticals.livewire.list-rating-detail')->with([
             'list_details' => $list_details,
         ]);

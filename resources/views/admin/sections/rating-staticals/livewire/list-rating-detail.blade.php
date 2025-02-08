@@ -53,6 +53,7 @@
                                         <th scope="col" class="text-center">Mã khách hàng</th>
                                         <th scope="col" class="text-center">Ngày tháng</th>
                                         <th scope="col" class="text-center">Đánh giá</th>
+                                        <th scope="col" class="text-center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,12 +73,22 @@
                                             <span class="badge badge-secondary">Không đánh giá</span>
                                             @endif
                                         </td>
+                                        <td class="text-center">
+                                            <span type="button" class="badge badge-sm badge-success" 
+                                            data-toggle="modal" data-target="#updateStaticalModal" data-statical-id="{{ $detail->id }}">
+                                                <i class="icon-pencil5"></i>
+                                            </span>
+                                            <span type="button" class="badge badge-sm badge-danger" 
+                                            data-toggle="modal" data-target="#deleteStaticalModal" data-statical-id="{{ $detail->id }}">
+                                                <i class="icon-trash"></i>
+                                            </span>
+                                        </td>
                                     </tr>
                     
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td colspan="4" class="text-center">(Không tìm thấy dữ liệu)</td>
+                                        <td colspan="5" class="text-center">(Không tìm thấy dữ liệu)</td>
                                     </tr>
                                     @endif
                                 </tbody>

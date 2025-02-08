@@ -60,7 +60,8 @@
                     <div class="mb-2 text-center">
                         <span>Kết quả đánh giá: {{ $rating_statical->rating->title }}</span>
                     </div>
-                    <button type="button" class="btn btn-outline-primary btn-block" wire:click.prevent="reselect">
+                    <button type="button" class="btn btn-outline-primary btn-block reselect-btn" 
+                    wire:click.prevent="reselect" wire:ignore wire:init="$dispatch('begin-countdown')">
                         Đánh giá lại
                     </button>
                 </div>
@@ -85,3 +86,21 @@
 
     @endif
 </div>
+
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $(document).on('begin-countdown', function() {
+            var reselect_btn = $('.reselect-btn');
+            console.log('test');
+            if (reselect_btn) {
+                reselect_btn.attr('disabled', false);
+                setTimeout(function () {
+                    reselect_btn.attr('disabled', true);
+                }, 30000);
+            }
+        })
+    })
+</script>
+@endpush

@@ -22,7 +22,7 @@ class StaticalChart extends Component
     public $chart_legend = [];
     public $chart_series = [];
 
-    protected $listeners = ['refresh' => '$refresh', 'search'];
+    protected $listeners = ['refresh' => '$refresh', 'search', 'updateChart'];
 
     public function boot(
         UserRepositoryInterface $userRepos,
@@ -49,8 +49,12 @@ class StaticalChart extends Component
     }
 
     public function updated($field) {
-        $this->skipRender();
+        // $this->skipRender();
         if (!in_array($field, ['user_id', 'daterange'])) return;
+        $this->updateChart();
+    }
+
+    public function updateChart() {
         $this->getChartData();
         $this->dispatch('update-chart');
         $this->dispatch('search', params: $this->params)->to(ListDetail::class);
@@ -62,6 +66,16 @@ class StaticalChart extends Component
         $this->params['user_id'] = $this->user_id;
         $rating_staticals = $this->ratingStaticalRepos->filter($this->params);
         $ratings = $this->ratingRepos->getAll();
+
+        if ($rating_staticals->count() > 0) $this->resetErrorBag();
+        else $this->addError('daterange', 'Không có dữ liệu!');
+
+        // if ($rating_staticals->count() <= 0) {
+        //         $this->dispatch('show-message',
+        //         type: 'error', 
+        //         message: 'Không có dữ liệu!',
+        //     );
+        // }
 
         $this->chart_legend = [];
         $this->chart_series = [];
@@ -86,6 +100,15 @@ class StaticalChart extends Component
                 'name' => 'Không đánh giá',
             ];
         }
+    }
+
+    public function resetDate() {
+        $this->resetErrorBag();
+        $this->daterange = '';
+        $this->params['from_date'] = '';
+        $this->params['to_date'] = '';
+        $this->dispatch('reset-daterange-picker');
+        $this->updateChart();
     }
 
     public function render()

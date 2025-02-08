@@ -21,7 +21,19 @@
                     </div>
                     <div class="col-3">
                         <label>Thời gian: </label>
-                        <input type="text" class="form-control mr-2 daterange-picker cursor-pointer" wire:model="daterange" readonly>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <input type="text" class="form-control daterange-picker cursor-pointer" wire:model="daterange" readonly>
+                            </div>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary" wire:click.prevent="resetDate" @disabled(!$daterange)>
+                                    <i class="icon-loop3"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @error('daterange')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
 
@@ -137,7 +149,6 @@
         });
 
         $(document).on('update-chart', function() {
-            console.log('test')
             var legend_data = @this.chart_legend;
             var series_data = @this.chart_series;
     
@@ -146,6 +157,8 @@
                 series: [{data: series_data}],
             })
         });
+
+        let this_year = (new Date()).getFullYear();
 
         $('.daterange-picker').daterangepicker({
             parentEl: '.content-inner',
@@ -156,8 +169,12 @@
                 'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                 '1 tuần trước': [moment().subtract(6, 'days'), moment()],
                 '1 tháng trước': [moment().subtract(29, 'days'), moment()],
-                'Tháng này': [moment().startOf('month'), moment().endOf('month')],
-                'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                // 'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+                // 'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'Quý 1': [`01/01/${this_year}`, `31/03/${this_year}`],
+                'Quý 2': [`01/04/${this_year}`, `30/06/${this_year}`],
+                'Quý 3': [`01/07/${this_year}`, `30/09/${this_year}`],
+                'Quý 4': [`01/10/${this_year}`, `31/12/${this_year}`],
             },
             locale: {
                 applyLabel: 'OK',
@@ -181,6 +198,10 @@
             @this.set('params.from_date', start_date);
             @this.set('params.to_date', end_date);
         });
+
+        $(document).on('reset-daterange-picker', function(e) {
+            $('.daterange-picker').val('');
+        })
     });
 </script>
 @endpush

@@ -105,6 +105,8 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
+        let this_year = (new Date()).getFullYear();
+
         $('.daterange-picker').daterangepicker({
             parentEl: '.content-inner',
             autoUpdateInput: false,
@@ -115,8 +117,12 @@
                 'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                 '1 tuần trước': [moment().subtract(6, 'days'), moment()],
                 '1 tháng trước': [moment().subtract(29, 'days'), moment()],
-                'Tháng này': [moment().startOf('month'), moment().endOf('month')],
-                'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                // 'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+                // 'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'Quý 1': [`01/01/${this_year}`, `31/03/${this_year}`],
+                'Quý 2': [`01/04/${this_year}`, `30/06/${this_year}`],
+                'Quý 3': [`01/07/${this_year}`, `30/09/${this_year}`],
+                'Quý 4': [`01/10/${this_year}`, `31/12/${this_year}`],
             },
             locale: {
                 applyLabel: 'OK',

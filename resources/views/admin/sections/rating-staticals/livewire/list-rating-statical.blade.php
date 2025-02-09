@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <select class="form-select form-select-sm custom-select mb-3 w-auto" wire:model="paginate">
+                        <select class="form-select form-select-sm custom-select mb-3 w-auto" wire:model.live="paginate">
                             @for ($page = 5; $page <= 20; $page+=5)
                             <option value="{{ $page }}">{{ $page }}</option>
                             @endfor

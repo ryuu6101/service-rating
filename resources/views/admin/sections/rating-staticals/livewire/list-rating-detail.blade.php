@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <select class="form-select custom-select w-auto float-right" wire:model="paginate">
+                        <select class="form-select custom-select w-auto float-right" wire:model.live="paginate">
                             @for ($page = 5; $page <= 20; $page+=5)
                             <option value="{{ $page }}">{{ $page }}</option>
                             @endfor

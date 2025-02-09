@@ -22,7 +22,7 @@
                     <div class="col-3">
                         <label>Thời gian: </label>
                         <div class="input-group">
-                            <div class="input-group-prepend">
+                            <div class="input-group-prepend" style="flex:1">
                                 <input type="text" class="form-control daterange-picker cursor-pointer" wire:model="daterange" readonly>
                             </div>
                             <div class="input-group-append">
@@ -34,6 +34,12 @@
                         @error('daterange')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
+                    </div>
+                    <div class="col-6">
+                        <a type="button" class="btn btn-success float-right" href="{{ route('rating.export', ['params' => $params]) }}">
+                            <i class="icon-file-excel mr-1"></i>
+                            Xuất file Excel
+                        </a>
                     </div>
                 </div>
 
@@ -105,9 +111,19 @@
                 orient: 'vertical',
                 top: 'center',
                 left: 0,
-                data: legend_data,
+                // data: legend_data,
                 itemHeight: 8,
-                itemWidth: 8
+                itemWidth: 8,
+                formatter: function (name) {
+                    return `{name|${name}} {divider|} {count|${series_data.filter((a) => a.name === name).map((a) => a.count)}}`;
+                },
+                textStyle: {
+                    rich: { 
+                        name: { width: 0 }, 
+                        divider: { width: "100%" }, 
+                        count: { width: 70, align: "center" } 
+                    } 
+                }
             },
 
             // Add series

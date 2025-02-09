@@ -89,6 +89,7 @@ class StaticalChart extends Component
             $this->chart_series[] = [
                 'value' => $rating_count,
                 'name' => $rating->title,
+                'count' => $rating_count,
             ];
         }
 
@@ -98,6 +99,7 @@ class StaticalChart extends Component
             $this->chart_series[] = [
                 'value' => $no_rating_count,
                 'name' => 'Không đánh giá',
+                'count' => $no_rating_count,
             ];
         }
     }

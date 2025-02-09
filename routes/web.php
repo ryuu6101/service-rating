@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\SectionController as AdminController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Web\SectionController as WebController;
+use App\Http\Controllers\Admin\SectionController as AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +29,13 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::redirect('/admin', '/admin/rating-staticals', 301)->name('admin');
     Route::prefix('admin')->group(function () {
-        Route::redirect('/', 'admin/rating-staticals', 301);
         Route::get('users', [AdminController::class, 'users'])->name('users.index');
         Route::get('client-service', [AdminController::class, 'clientService'])->name('client-service.index');
         Route::get('rating-staticals', [AdminController::class, 'ratingStaticals'])->name('rating-staticals.index');
         Route::get('banner-images', [AdminController::class, 'bannerImages'])->name('banner-images.index');
+        
+        Route::get('rating-export', [ExportController::class, 'ratingExport'])->name('rating.export');
     });
 });

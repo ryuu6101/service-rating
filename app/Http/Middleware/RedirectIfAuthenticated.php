@@ -24,7 +24,8 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 // return redirect(RouteServiceProvider::HOME);
                 // Session::put('request-logout', true);
-                return back();
+                // return back();
+                return redirect()->route('admin');
             }
         }
 

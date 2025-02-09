@@ -49,9 +49,15 @@
                                         <td class="text-left">{{ $user->name }}</td>
                                         <td class="text-center">{{ $user->role->title }}</td>
                                         <td class="text-center">
+                                            @if (auth()->user()->id == $user->id)
+                                            <span class="text-muted">
+                                                <i class="icon-checkbox-{{ $user->is_actived ? 'checked2' : 'unchecked2' }}"></i>
+                                            </span>
+                                            @else
                                             <a type="button" class="text-primary" wire:click.prevent="toggleUser({{ $user->id }})">
                                                 <i class="icon-checkbox-{{ $user->is_actived ? 'checked2' : 'unchecked2' }}"></i>
                                             </a>
+                                            @endif
                                         </td>
                                         <td class="text-center">
                                             {{-- <span type="button" class="badge badge-sm badge-primary" 

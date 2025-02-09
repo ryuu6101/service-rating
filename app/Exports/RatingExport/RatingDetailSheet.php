@@ -23,7 +23,7 @@ class RatingDetailSheet implements FromArray, WithTitle, WithEvents
         $rows = [];
 
         $rows[] = ['THỐNG KÊ CHI TIẾT'];
-        $rows[] = ['TỪ NGÀY'.($this->params['from_date'] ?? '...').' ĐẾN NGÀY '.($this->params['to_date'] ?? '...')];
+        $rows[] = ['TỪ NGÀY '.($this->params['from_date'] ?? '...').' ĐẾN NGÀY '.($this->params['to_date'] ?? '...')];
         $rows[] = ['STT', 'Mã khách hàng', 'Ngày tháng', 'Đánh giá'];
 
         $stt = 1;

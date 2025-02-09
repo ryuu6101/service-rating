@@ -111,7 +111,7 @@
                 orient: 'vertical',
                 top: 'center',
                 left: 0,
-                // data: legend_data,
+                data: legend_data,
                 itemHeight: 8,
                 itemWidth: 8,
                 formatter: function (name) {
@@ -167,10 +167,15 @@
         $(document).on('update-chart', function() {
             var legend_data = @this.chart_legend;
             var series_data = @this.chart_series;
-    
+
             rating_statical_chart.setOption({
-                legend: {data: legend_data},
                 series: [{data: series_data}],
+                legend: {
+                    data: legend_data,
+                    formatter: function (name) {
+                        return `{name|${name}} {divider|} {count|${series_data.filter((a) => a.name === name).map((a) => a.count)}}`;
+                    },
+                },
             })
         });
 

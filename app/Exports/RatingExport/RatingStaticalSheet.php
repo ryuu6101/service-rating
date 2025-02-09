@@ -6,8 +6,9 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class RatingStaticalSheet implements FromArray, WithTitle, WithEvents
+class RatingStaticalSheet implements FromArray, WithTitle, WithEvents, WithStrictNullComparison
 {
     protected $ratings;
     protected $rating_staticals;
